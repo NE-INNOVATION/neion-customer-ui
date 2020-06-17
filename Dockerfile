@@ -22,18 +22,15 @@
 ### STAGE 2: Run ###
 FROM nginxinc/nginx-unprivileged
 
-#### make the 'app' folder the current working directory
-WORKDIR /usr/src/app
-
 #### copy nginx conf
 COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 
 RUN rm -rf ./config/nginx.conf
 
 #### copy artifact build from the 'build environment'
-COPY /usr/src/app/elements /usr/share/nginx/html
+COPY ./elements /usr/share/nginx/html
 
-RUN rm -rf /usr/src/app/elements
+RUN rm -rf ./elements
 
 #### don't know what this is, but seems cool and techy
 CMD ["nginx", "-g", "daemon off;"]
